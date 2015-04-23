@@ -118,6 +118,11 @@ func Process(prefix string, spec interface{}) error {
 					}
 				}
 				f.SetFloat(floatValue)
+			case reflect.Slice:
+				if f.Type() == reflect.TypeOf([]string{}) {
+					stringSliceValue := strings.Split(value, ",")
+					f.Set(reflect.ValueOf(stringSliceValue))
+				}
 			}
 		}
 	}
